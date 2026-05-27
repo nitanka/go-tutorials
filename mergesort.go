@@ -5,6 +5,7 @@ import "fmt"
 
 func merging(array []int, low int, mid int, high int) {
    fmt.Println("Merging", array)
+   temp := make([]int, high-low+1)
    var (
       l1 int = low
       l2 int = mid + 1
@@ -12,23 +13,27 @@ func merging(array []int, low int, mid int, high int) {
    )
    for l1 <= mid && l2 <= high {
       if array[l1] <= array[l2] {
-         array[i] = array[l1]
+         temp[i] = array[l1]
          l1++
       } else {
-         array[i] = array[l2]
+         temp[i] = array[l2]
          l2++
       }
       i++
    }
    for l1 <= mid {
-      array[i] = array[l1]
+      temp[i] = array[l1]
       l1++
       i++
    }
    for l2 <= high {
-      array[i] = array[l2]
+      temp[i] = array[l2]
       l2++
       i++
+   }
+
+   for k := 0; k < len(temp); k++ {
+      array[low+k] = temp[k]
    }
 }
 
