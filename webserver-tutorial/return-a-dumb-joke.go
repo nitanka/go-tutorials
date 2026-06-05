@@ -15,7 +15,7 @@ var randomJokes = []string{
 }
 
 func getRandomJoke(jokes []string) string {
-	random := rand.Intn(len(randomJokes))
+	random := rand.IntN(len(randomJokes))
 	return jokes[random]
 }
 
