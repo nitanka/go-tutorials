@@ -30,6 +30,8 @@ func MergeSortHandler(w http.ResponseWriter, r *http.Request) {
 
 	length := len(numbers)
 
+	fmt.Println("Length of numbers: ", length)
+
 	sorting.MergeSort(numbers, 0, length-1)
 
 	w.Header().Set("Content-Type", "application/json")

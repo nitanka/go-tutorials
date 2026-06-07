@@ -3,12 +3,12 @@ package sorting
 import "fmt"
 
 func merging(array []int, low int, mid int, high int) {
-	fmt.Println("Merging", array)
+	fmt.Println("\nMerging ", array)
 	temp := make([]int, high-low+1)
 	var (
 		l1 int = low
 		l2 int = mid + 1
-		i  int = low
+		i  int = 0
 	)
 	for l1 <= mid && l2 <= high {
 		if array[l1] <= array[l2] {
@@ -34,9 +34,11 @@ func merging(array []int, low int, mid int, high int) {
 	for k := 0; k < len(temp); k++ {
 		array[low+k] = temp[k]
 	}
+	fmt.Println("\nMerged array: ", array)
 }
 
 func MergeSort(array []int, low int, high int) {
+	fmt.Printf("\n\nSorting %v, low: %d, high: %d\n", array, low, high)
 	var mid int
 	if low < high {
 		mid = (low + high) / 2
@@ -44,6 +46,7 @@ func MergeSort(array []int, low int, high int) {
 		MergeSort(array, mid+1, high)
 		merging(array, low, mid, high)
 	} else {
+		fmt.Printf("\n\nBase case reached for array: %v, low: %d, high: %d\n", array, low, high)
 		return
 	}
 }

@@ -7,7 +7,7 @@ import (
 )
 
 func RegisterSortingRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("POST /sort/bubble", handlers.BubbleSortHandler)
-	mux.HandleFunc("POST /sort/merge", handlers.MergeSortHandler)
-	mux.HandleFunc("POST /sort/selection", handlers.SelectionSortHandler)
+	mux.HandleFunc("/sort/bubble", handlers.BubbleSortHandler)
+	mux.HandleFunc("/sort/merge", handlers.MergeSortHandler)
+	mux.HandleFunc("/sort/selection", handlers.SelectionSortHandler)
 }
