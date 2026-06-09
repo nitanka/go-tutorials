@@ -79,6 +79,22 @@ func (bst *BST) height(node *Node) int {
 	return 1 + rightHeight
 }
 
+// Added via AI
+func printTree(node *Node, prefix string, label string) {
+	if node == nil {
+		return
+	}
+	fmt.Printf("%s%s%d\n", prefix, label, node.value)
+	printTree(node.left, prefix+"│   ", "├── L: ")
+	printTree(node.right, prefix+"    ", "└── R: ")
+}
+
+func (bst *BST) printStructure() {
+	fmt.Printf("Root: %d\n", bst.node.value)
+	printTree(bst.node.left, "│   ", "├── L: ")
+	printTree(bst.node.right, "    ", "└── R: ")
+}
+
 // func main() {
 // 	bst := &BST{}
 // 	bst.addNode(5)
