@@ -1,4 +1,4 @@
-package main
+package trees
 
 import "fmt"
 
@@ -17,7 +17,6 @@ func newNodeCreate(element int) *Node {
 	return temp
 }
 
-// Function to insert a node with a specific value in the tree
 func insertNode(node *Node, value int) *Node {
 	if node == nil {
 		return newNodeCreate(value)
@@ -30,7 +29,7 @@ func insertNode(node *Node, value int) *Node {
 	return node
 }
 
-func (bst *BST) addNode(value int) {
+func (bst *BST) AddNode(value int) {
 	bst.node = insertNode(bst.node, value)
 }
 
@@ -43,8 +42,8 @@ func (node *Node) display() {
 	node.right.display()
 }
 
-func (bst *BST) display() {
-	fmt.Println("BST in-order traversal:\n\n")
+func (bst *BST) Display() {
+	fmt.Println("BST in-order traversal")
 	bst.node.display()
 }
 
@@ -61,18 +60,33 @@ func searchValue(node *Node, value int) *Node {
 	return searchValue(node.right, value)
 }
 
-func (bst *BST) search(value int) *Node {
+func (bst *BST) Search(value int) *Node {
 	return searchValue(bst.node, value)
 }
 
-func (bst *BST) height(node *Node) int {
+func collectInOrder(node *Node, result *[]int) {
+	if node == nil {
+		return
+	}
+	collectInOrder(node.left, result)
+	*result = append(*result, node.value)
+	collectInOrder(node.right, result)
+}
+
+func (bst *BST) InOrder() []int {
+	result := []int{}
+	collectInOrder(bst.node, &result)
+	return result
+}
+
+func (bst *BST) Height(node *Node) int {
 
 	if node == nil {
 		return 0
 	}
 
-	leftHeight := bst.height(node.left)
-	rightHeight := bst.height(node.right)
+	leftHeight := bst.Height(node.left)
+	rightHeight := bst.Height(node.right)
 	if leftHeight > rightHeight {
 		return 1 + leftHeight
 	}
@@ -89,24 +103,8 @@ func printTree(node *Node, prefix string, label string) {
 	printTree(node.right, prefix+"    ", "└── R: ")
 }
 
-func (bst *BST) printStructure() {
+func (bst *BST) PrintStructure() {
 	fmt.Printf("Root: %d\n", bst.node.value)
 	printTree(bst.node.left, "│   ", "├── L: ")
 	printTree(bst.node.right, "    ", "└── R: ")
 }
-
-// func main() {
-// 	bst := &BST{}
-// 	bst.addNode(5)
-// 	bst.addNode(3)
-// 	bst.addNode(7)
-// 	bst.addNode(1)
-// 	bst.addNode(4)
-// 	bst.display()
-//
-// 	if n := bst.search(3); n != nil {
-// 		fmt.Println("Found:", n.value)
-// 	} else {
-// 		fmt.Println("Not found")
-// 	}
-// }
